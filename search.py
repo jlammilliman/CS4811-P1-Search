@@ -86,18 +86,66 @@ def depthFirstSearch(problem):
     print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
+    """Cost of each weight is assumed to be 0 so the first solution is chosen"""
+
     "*** YOUR CODE HERE ***"
+
+    visited = set()
+    stack = [ ]
+    stack.append( (problem.getStartState(), [ ]) )
+    while len(stack) != 0:
+        current_state, current_path = stack.pop()
+        if problem.isGoalState( current_state ):
+            return current_path
+        elif current_state in visited:
+            continue
+        else:
+            visited.add(current_state)
+            for next_state, next_transition, next_weight in problem.getSuccessors(current_state):
+                stack.append((next_state, current_path + [next_transition]))
+                return None
+
     util.raiseNotDefined() ## TODO
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
+    """Cost of each weight is assumed to be 0 so the first solution is chosen"""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined() ## TODO
+
+    visited = set()
+    queue = [ ]
+    queue.append( (problem.getStartState(), [ ]) )
+    while len(queue) != 0:
+        current_state, current_path = queue.pop( 0 )
+        if problem.isGoalState( current_state ):
+            return current_path
+        elif current_state in visited:
+            continue
+        else:
+            visited.add(current_state)
+            for next_state, next_transition, next_weight in problem.getSuccessors(current_state):
+                queue.append((next_state, current_path + [next_transition]))
+                return None
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
+    """Each weight between nodes has the same weight and is therefore uniform"""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined() ## TODO
+
+    visited = set()
+    priority_queue = util.PriorityQueue()
+    priority_queue.push((problem.getStartState(), [ ], 0), 0)
+    while not priority_queue.isEmpty():
+        current_state, current_path, current_weight = priority_queue.pop()
+        if problem.isGoalState( current_state ):
+            return current_path
+        elif current_state in visited:
+            continue
+        else:
+            visited.add(current_state)
+            for next_state, next_transition, next_weight in problem.getSuccessors(current_state):
+                priority_queue.push((next_state, current_path + [next_transition], current_weight + next_weight), current_weight + next_weight)
+                return None
 
 def nullHeuristic(state, problem=None):
     """
