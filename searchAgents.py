@@ -520,9 +520,8 @@ class ClosestDotSearchAgent(SearchAgent):
         walls = gameState.getWalls()
         problem = AnyFoodSearchProblem(gameState)
 
-        "*** YOUR CODE HERE ***" ## TODO
-        util.raiseNotDefined()
-
+        "*** YOUR CODE HERE ***" 
+        return search.breadthFirstSearch(problem) """we use bfs because the children at the front of the queue are the closest"""
 class AnyFoodSearchProblem(PositionSearchProblem):
     """
     A search problem for finding a path to any food.
@@ -556,8 +555,8 @@ class AnyFoodSearchProblem(PositionSearchProblem):
         """
         x,y = state
 
-        "*** YOUR CODE HERE ***" ## TODO
-        util.raiseNotDefined()
+        "*** YOUR CODE HERE ***" 
+        return self.food[x][y]
 
 def mazeDistance(point1, point2, gameState):
     """
