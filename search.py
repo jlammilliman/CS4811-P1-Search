@@ -103,9 +103,7 @@ def depthFirstSearch(problem):
             visited.add(current_state)
             for next_state, next_transition, next_weight in problem.getSuccessors(current_state):
                 stack.append((next_state, current_path + [next_transition]))
-                return None
-
-    util.raiseNotDefined() ## TODO
+    return None
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
@@ -125,7 +123,7 @@ def breadthFirstSearch(problem):
             visited.add(current_state)
             for next_state, next_transition, next_weight in problem.getSuccessors(current_state):
                 queue.append((next_state, current_path + [next_transition]))
-                return None
+    return None
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
@@ -145,7 +143,7 @@ def uniformCostSearch(problem):
             visited.add(current_state)
             for next_state, next_transition, next_weight in problem.getSuccessors(current_state):
                 priority_queue.push((next_state, current_path + [next_transition], current_weight + next_weight), current_weight + next_weight)
-                return None
+    return None
 
 def nullHeuristic(state, problem=None):
     """
@@ -158,7 +156,6 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
     util.raiseNotDefined() ## TODO
-
 
 # Abbreviations
 bfs = breadthFirstSearch
