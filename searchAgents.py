@@ -323,16 +323,24 @@ class CornersProblem(search.SearchProblem):
             #   nextx, nexty = int(x + dx), int(y + dy)
             #   hitsWall = self.walls[nextx][nexty]
 
-
+            """
+            The current position will be when the state of the node is at 0
+            """
             x,y = state[0]
             dx, dy = Actions.directionToVector(action)
             nextx, nexty = int(x + dx), int(y + dy)
             hitsWall = self.walls[nextx][nexty]
 
+            """
+            Check if it does not hit the wall so we can move to the next successor
+            """
             if not hitsWall:
                 positionSuccessor = (nextx, nexty)
                 cornerSuccessor = list(state[1])
 
+                """
+                Check if successor is in the corner so we can add it to the list 
+                """
                 if positionSuccessor in self.corners and positionSuccessor not in state[1]:
                     cornerSuccessor.append(positionSuccessor)
 
@@ -521,7 +529,8 @@ class ClosestDotSearchAgent(SearchAgent):
         problem = AnyFoodSearchProblem(gameState)
 
         "*** YOUR CODE HERE ***" 
-        return search.breadthFirstSearch(problem) """we use bfs because the children at the front of the queue are the closest"""
+        """we use bfs because the children at the front of the queue are the closest"""
+        return search.breadthFirstSearch(problem) 
 class AnyFoodSearchProblem(PositionSearchProblem):
     """
     A search problem for finding a path to any food.
