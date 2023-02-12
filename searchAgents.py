@@ -453,8 +453,32 @@ def foodHeuristic(state, problem):
     problem.heuristicInfo['wallCount']
     """
     position, foodGrid = state
-    "*** YOUR CODE HERE ***" ## TODO
-    return 0
+    "*** YOUR CODE HERE ***"
+    hMultiplier = 0.7  # Manually adjusted value to tune this
+    ## If we wanted to, this is where we could run the genetic algorthim
+    ## Would have to give it some more variables to consider, like
+    ## How much we like food vs getting murdered by a ghost, etc.
+    
+    # The map of pacman is a grid. We don't need to consider walls, 
+    # Just the (x, y) pairs that house the food pellets, and then simply 
+    # return the cost of getting to the best food pellets. 
+    knownFoodPos = foodGrid.asList()
+    totalCost = 0
+    
+    for _ in range(len(knownFoodPos)):
+        hCost, bestFood = min(
+            [ # This does not scale well, but it is consistent lol
+                ((util.manhattanDistance(position, food) ** hMultiplier), food)
+                for food in knownFoodPos
+            ]
+        )
+        position = bestFood
+        totalCost += hCost
+        # print(f"   | Position of Best Food: '{bestFood}' \t| Cost: '{hCost}' \t| Total Cost: '{totalCost}'")
+        knownFoodPos.remove(bestFood)
+    
+    # print(f"   | Cost: {totalCost}")
+    return totalCost
 
 class ClosestDotSearchAgent(SearchAgent):
     "Search for all food using a sequence of searches"
