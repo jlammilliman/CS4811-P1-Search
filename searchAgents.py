@@ -383,11 +383,12 @@ def cornersHeuristic(state, problem):
 
     "*** YOUR CODE HERE ***" ## TODO
     # previous position
+    corner = 0
     currentPosition = state[0]
     visitedCorners = state[1]
     # remainingCorners = [corner for i, corner in enumerate(corners) if i not in visitedCorners]
     # corners that have not been visited
-    remainingCorners = list(set(corners)) - set(state[1])
+    remainingCorners = list(set(corners) - set(state[1]))
     heuristic = 0
 
     while remainingCorners:
@@ -404,8 +405,9 @@ def cornersHeuristic(state, problem):
 
         # mDistance, corner = min(distanceList)
         heuristic += distanceList
-        currentPosition = corner
+
         remainingCorners.remove(distanceCorner)
+        currentPosition = distanceCorner
 
     return heuristic
     # return 0 # Default to trivial solution
