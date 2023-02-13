@@ -394,7 +394,7 @@ def cornersHeuristic(state, problem):
     while remainingCorners:
         # distanceList = [(util.manhattanDistance(currentPosition, corner), corner) for corner in remainingCorners]
         distanceCorner = remainingCorners[0]
-        distanceList = util.manhattanDistance(currentPosition, corner)
+        distanceList = util.manhattanDistance(currentPosition, distanceCorner)
 
         for corner in remainingCorners[1:]:
             distance = util.manhattanDistance(currentPosition, corner)
