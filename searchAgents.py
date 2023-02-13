@@ -396,6 +396,7 @@ def cornersHeuristic(state, problem):
         distanceCorner = remainingCorners[0]
         distanceList = util.manhattanDistance(currentPosition, distanceCorner)
 
+        # slice remaining corners list so we have a new list with only unvisited corners
         for corner in remainingCorners[1:]:
             distance = util.manhattanDistance(currentPosition, corner)
 
