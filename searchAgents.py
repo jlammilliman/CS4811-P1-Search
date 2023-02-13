@@ -344,7 +344,7 @@ class CornersProblem(search.SearchProblem):
                 if positionSuccessor in self.corners and positionSuccessor not in state[1]:
                     cornerSuccessor.append(positionSuccessor)
 
-                successors.append(positionSuccessor, tuple(cornerSuccessor), action, 1)
+                successors.append(((positionSuccessor, tuple(cornerSuccessor)), action, 1))
 
         self._expanded += 1 # DO NOT CHANGE
         return successors
