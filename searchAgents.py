@@ -344,6 +344,8 @@ class CornersProblem(search.SearchProblem):
                 if positionSuccessor in self.corners and positionSuccessor not in state[1]:
                     cornerSuccessor.append(positionSuccessor)
 
+
+
                 successors.append(((positionSuccessor, tuple(cornerSuccessor)), action, 1))
 
         self._expanded += 1 # DO NOT CHANGE
@@ -380,17 +382,30 @@ def cornersHeuristic(state, problem):
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
 
     "*** YOUR CODE HERE ***" ## TODO
+    # previous position
     currentPosition = state[0]
     visitedCorners = state[1]
-    remainingCorners = [corner for i, corner in enumerate(corners) if i not in visitedCorners]
+    # remainingCorners = [corner for i, corner in enumerate(corners) if i not in visitedCorners]
+    # corners that have not been visited
+    remainingCorners = list(set(corners)) - set(state[1])
     heuristic = 0
 
     while remainingCorners:
-        distanceList = [(util.manhattanDistance(currentPosition, corner), corner) for corner in remainingCorners]
-        mDistance, corner = min(distanceList)
-        heuristic += mDistance
+        # distanceList = [(util.manhattanDistance(currentPosition, corner), corner) for corner in remainingCorners]
+        distanceCorner = remainingCorners[0]
+        distanceList = util.manhattanDistance(currentPosition, corner)
+
+        for corner in remainingCorners[1:]:
+            distance = util.manhattanDistance(currentPosition, corner)
+
+            if distance < distanceList:
+                distanceList = distance
+                distanceCorner = corner
+
+        # mDistance, corner = min(distanceList)
+        heuristic += distanceList
         currentPosition = corner
-        remainingCorners.remove(corner)
+        remainingCorners.remove(distanceCorner)
 
     return heuristic
     # return 0 # Default to trivial solution
